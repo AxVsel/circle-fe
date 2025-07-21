@@ -10,7 +10,7 @@ import { useState } from "react";
 import galleryIcon from "@/assets/gallery-add.png";
 import avatar from "@/assets/user.png";
 
-export default function PostDialog() {
+export default function DialogPost() {
   const [text, setText] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -35,7 +35,7 @@ export default function PostDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="w-full bg-green-600 hover:bg-green-700 text-white text-base font-semibold px-6 py-2 rounded-full">
-          New Post
+          Create Post
         </Button>
       </DialogTrigger>
 

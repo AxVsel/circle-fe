@@ -1,14 +1,15 @@
+// pages/auth/AuthRegister.tsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import circleIcon from "../../assets/logo.png";
+import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { api } from "../services/api";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/slice/authSlice";
+import { login } from "../../redux/slice/authSlice";
+import circleIcon from "../../assets/logo.png";
 
 export default function AuthRegister() {
   const [username, setUsername] = useState("");
-  const [full_name, setFullname] = useState("");
+  const [full_name, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,11 +27,24 @@ export default function AuthRegister() {
         password,
       });
 
-      const { token, ...userData } = res.data.data;
-      localStorage.setItem("token", token);
-      dispatch(setUser(userData));
-      toast.success("Register berhasil!");
-      navigate("/");
+      if (res.data && res.data.data) {
+        const userData = res.data.data;
+        const token = userData.token;
+
+        // Simpan token ke localStorage
+        localStorage.setItem("token", token);
+
+        // Simpan user ke Redux
+        dispatch(
+          login({
+            user: userData.user,
+            token: token,
+          })
+        );
+
+        toast.success("Registrasi berhasil!");
+        navigate("/");
+      }
     } catch (error: any) {
       const msg =
         error?.response?.data?.message || "Terjadi kesalahan saat register.";
@@ -41,7 +55,6 @@ export default function AuthRegister() {
   return (
     <div className="flex flex-col h-screen justify-center items-center p-4 bg-zinc-900">
       <div className="w-full max-w-sm space-y-6 text-white">
-        {/* Logo dan Title */}
         <div className="flex flex-col">
           <img
             src={circleIcon}
@@ -53,7 +66,6 @@ export default function AuthRegister() {
           </h2>
         </div>
 
-        {/* Form Input */}
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -68,7 +80,7 @@ export default function AuthRegister() {
             type="text"
             placeholder="Fullname"
             value={full_name}
-            onChange={(e) => setFullname(e.target.value)}
+            onChange={(e) => setFullName(e.target.value)}
             required
             className="w-full px-4 py-2 border border-zinc-600 rounded-md bg-zinc-800 text-white"
           />
@@ -99,7 +111,6 @@ export default function AuthRegister() {
           </button>
         </form>
 
-        {/* Footer Link */}
         <p className="text-center text-sm text-gray-300">
           Already have an account?{" "}
           <Link to="/login" className="text-green-500 hover:underline">

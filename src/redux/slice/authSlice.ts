@@ -2,21 +2,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface UserState {
-  user_id: number | null;
-  username: string | null;
-  name: string | null;
-  email: string | null;
-  avatar: string | null;
+interface User {
+  id: number;
+  username: string;
+  full_name: string;
+  email: string;
+  photo_profile?: string;
+  // tambahkan field lain sesuai model
+}
+
+interface AuthState {
+  user: User | null;
   token: string | null;
 }
 
-const initialState: UserState = {
-  user_id: null,
-  username: null,
-  name: null,
-  email: null,
-  avatar: null,
+const initialState: AuthState = {
+  user: null,
   token: null,
 };
 
@@ -24,12 +25,17 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserState>) => {
-      return { ...state, ...action.payload };
+    login(state, action: PayloadAction<{ user: User; token: string }>) {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
     },
-    clearUser: () => initialState,
+    logout(state) {
+      state.user = null;
+      state.token = null;
+      localStorage.removeItem("token");
+    },
   },
 });
 
-export const { setUser, clearUser } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;

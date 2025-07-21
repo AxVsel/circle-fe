@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/slice/authSlice";
-import { api } from "../services/api";
+import { login } from "../../redux/slice/authSlice"; // pastikan login action tersedia
+import { api } from "../services/api"; // axios instance
 import circleIcon from "../../assets/logo.png";
 import { toast } from "react-hot-toast";
 
@@ -22,12 +22,17 @@ export default function AuthLogin() {
       });
 
       if (res.data && res.data.data) {
-        const userData = res.data.data;
-        const token = userData.token;
+        const userData = res.data.data; // asumsi userData = { user, token }
 
-        localStorage.setItem("token", token);
+        localStorage.setItem("token", userData.token);
 
-        dispatch(setUser(userData));
+        dispatch(
+          login({
+            user: userData.user, // ambil dari userData
+            token: userData.token,
+          })
+        );
+
         toast.success("Login berhasil!");
         navigate("/");
       }
