@@ -1,15 +1,17 @@
 // components/PrivateRoute.tsx
 import { Navigate } from "react-router-dom";
 
-interface PrivateRouteProps {
-  children: React.ReactNode;
-}
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/GlobalStore";
 
-export default function PrivateRoute({ children }: PrivateRouteProps) {
-  const token = localStorage.getItem("token");
+export default function PrivateRoute({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const token = useSelector((state: RootState) => state.auth.token);
 
   if (!token) {
-    // Jika tidak ada token, redirect ke halaman login
     return <Navigate to="/login" replace />;
   }
 

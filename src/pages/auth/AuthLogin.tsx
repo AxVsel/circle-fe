@@ -22,13 +22,22 @@ export default function AuthLogin() {
       });
 
       if (res.data && res.data.data) {
-        const userData = res.data.data; // asumsi userData = { user, token }
+        const userData = res.data.data;
+
+        const user = {
+          id: userData.user_id,
+          username: userData.username,
+          full_name: userData.name,
+          email: userData.email,
+          photo_profile: userData.photo_profile,
+        };
 
         localStorage.setItem("token", userData.token);
+        localStorage.setItem("user", JSON.stringify(user)); // ✅ Tambahkan ini
 
         dispatch(
           login({
-            user: userData.user, // ambil dari userData
+            user,
             token: userData.token,
           })
         );

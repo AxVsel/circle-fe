@@ -29,16 +29,12 @@ export default function AuthRegister() {
 
       if (res.data && res.data.data) {
         const userData = res.data.data;
-        const token = userData.token;
+        localStorage.setItem("token", userData.token);
 
-        // Simpan token ke localStorage
-        localStorage.setItem("token", token);
-
-        // Simpan user ke Redux
         dispatch(
           login({
             user: userData.user,
-            token: token,
+            token: userData.token,
           })
         );
 

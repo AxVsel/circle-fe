@@ -35,6 +35,7 @@ export default function LeftBarMenu() {
     try {
       await api.post("/api/v1/auth/logout"); // panggil backend
       localStorage.removeItem("token"); // hapus token jika masih pakai localStorage
+      localStorage.removeItem("user"); // hapus token jika masih pakai localStorage
       dispatch(logout()); // clear redux
       navigate("/login");
     } catch (err) {
