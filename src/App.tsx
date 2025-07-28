@@ -1,18 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Bar from "./pages/Routes";
+import GlobalBar from "./pages/GlobalBar";
 import Login from "./pages/auth/AuthLogin";
 import Register from "./pages/auth/AuthRegister";
 import ForgotPassword from "./pages/auth/AuthForgotPassword";
 import PrivateRoute from "./pages/private/PrivateRoute";
 import PublicRoute from "./pages/private/PublicRoute";
-
 import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
     <BrowserRouter>
-      {/* Toaster di luar Routes */}
-      <Toaster position="top-center" />
+      <Toaster position="top-right" />
       <Routes>
         <Route
           path="/login"
@@ -42,7 +40,7 @@ export default function App() {
           path="/*"
           element={
             <PrivateRoute>
-              <Bar />
+              <GlobalBar />
             </PrivateRoute>
           }
         />

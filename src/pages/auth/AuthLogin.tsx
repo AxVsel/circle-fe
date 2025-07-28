@@ -30,6 +30,7 @@ export default function AuthLogin() {
           full_name: userData.name,
           email: userData.email,
           photo_profile: userData.photo_profile,
+          background: userData.background,
         };
 
         localStorage.setItem("token", userData.token);

@@ -3,21 +3,21 @@ import { useEffect } from "react";
 import LeftBarButton from "./LeftBarButton";
 import PostDialog from "./DialogPost";
 import { Button } from "@/components/ui/button";
-import { api } from "../services/api"; // axios instance
+import { api } from "../../services/api"; // axios instance
 
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slice/authSlice"; // pastikan path sesuai
 
 // Icons
-import circleIcon from "../../assets/logo.png";
-import homeIcon from "../../assets/home.png";
-import userIcon from "../../assets/user.png";
-import followsIcon from "../../assets/follow.png";
-import profileIcon from "../../assets/profile.png";
-import homeFill from "../../assets/home-fill.png";
-import userFill from "../../assets/user-fill.png";
-import followFill from "../../assets/follow-fill.png";
-import profileFill from "../../assets/profile-fill.png";
+import circleIcon from "@/assets/logo.png";
+import homeIcon from "@/assets/home.png";
+import userIcon from "@/assets/user.png";
+import followsIcon from "@/assets/follow.png";
+import profileIcon from "@/assets/profile.png";
+import homeFill from "@/assets/home-fill.png";
+import userFill from "@/assets/user-fill.png";
+import followFill from "@/assets/follow-fill.png";
+import profileFill from "@/assets/profile-fill.png";
 
 export default function LeftBarMenu() {
   const dispatch = useDispatch();

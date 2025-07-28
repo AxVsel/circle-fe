@@ -8,6 +8,7 @@ interface User {
   full_name: string;
   email: string;
   photo_profile?: string;
+  background?: string;
   // tambahkan field lain sesuai model
 }
 

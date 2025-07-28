@@ -5,11 +5,11 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
-import { fetchThreads } from "../../redux/slice/threadSlice"; // pastikan path benar
+import { fetchThreads } from "../../../../redux/slice/threadSlice";
 import type { AppDispatch } from "@/redux/GlobalStore";
 import type { RootState } from "@/redux/GlobalStore";
 
-export default function InputPost() {
+export default function ThreadInput() {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -42,14 +42,17 @@ export default function InputPost() {
     }
     try {
       setLoading(true);
-      await axios.post("http://localhost:2002/api/v1/auth/thread", formData, {
-        withCredentials: true,
-      });
+      await axios.post(
+        "http://localhost:2002/api/v1/thread/threads",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
 
-      dispatch(fetchThreads());
+      dispatch(fetchThreads({ offset: 0, limit: 10 }));
 
       toast.success("Postingan berhasil ditambahkan!");
-
       // Reset form
       setText("");
       setImagePreview(null);

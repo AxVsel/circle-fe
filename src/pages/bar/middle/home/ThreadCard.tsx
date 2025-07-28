@@ -12,9 +12,11 @@ interface PostCardProps {
   comments: number;
   image?: string;
   liked?: boolean;
+  onClickReply?: () => void; // 🆕 Tambahkan ini
+  onClickLike?: () => void;
 }
 
-export default function PostCard({
+export default function ThreadCard({
   username,
   handle,
   time,
@@ -24,6 +26,8 @@ export default function PostCard({
   comments,
   image,
   liked = false,
+  onClickReply,
+  onClickLike,
 }: PostCardProps) {
   return (
     <div className="flex gap-3 py-4 border-b border-zinc-800">
@@ -57,7 +61,10 @@ export default function PostCard({
 
         {/* Reactions */}
         <div className="flex items-center gap-6 mt-2 text-zinc-400 text-sm">
-          <div className="flex items-center gap-1 cursor-pointer hover:text-green-500">
+          <div
+            className="flex items-center gap-1 cursor-pointer hover:text-red-500"
+            onClick={onClickLike} // 🆕 tambahkan ini
+          >
             <img
               src={liked ? heartFill : heart}
               alt="like"
@@ -65,7 +72,11 @@ export default function PostCard({
             />
             {likes}
           </div>
-          <div className="flex items-center gap-1 cursor-pointer hover:text-green-500">
+
+          <div
+            className="flex items-center gap-1 cursor-pointer hover:text-green-500"
+            onClick={onClickReply} // 🆕 Tambahkan ini
+          >
             <img src={replies} alt="replies" className="w-4 h-4" />
             {comments} Replies
           </div>
