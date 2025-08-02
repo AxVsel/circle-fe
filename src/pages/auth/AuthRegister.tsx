@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
-import { api } from "../services/api";
+import { api } from "../../services/api";
 import { login } from "../../redux/slice/authSlice";
 import circleIcon from "../../assets/logo.png";
 
@@ -29,8 +29,17 @@ export default function AuthRegister() {
 
       if (res.data && res.data.data) {
         const userData = res.data.data;
-        localStorage.setItem("token", userData.token);
+        const user = {
+          id: userData.user_id,
+          username: userData.username,
+          full_name: userData.name,
+          email: userData.email,
+          photo_profile: userData.photo_profile,
+          background: userData.background,
+        };
 
+        localStorage.setItem("token", userData.token);
+        localStorage.setItem("user", JSON.stringify(user));
         dispatch(
           login({
             user: userData.user,

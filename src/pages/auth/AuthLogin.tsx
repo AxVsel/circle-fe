@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/slice/authSlice"; // pastikan login action tersedia
-import { api } from "../services/api"; // axios instance
+import { api } from "../../services/api"; // axios instance
 import circleIcon from "../../assets/logo.png";
 import { toast } from "react-hot-toast";
 
@@ -31,6 +31,7 @@ export default function AuthLogin() {
           email: userData.email,
           photo_profile: userData.photo_profile,
           background: userData.background,
+          bio: userData.bio,
         };
 
         localStorage.setItem("token", userData.token);

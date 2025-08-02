@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import LeftBarButton from "./LeftBarButton";
 import PostDialog from "./DialogPost";
 import { Button } from "@/components/ui/button";
-import { api } from "../../services/api"; // axios instance
+import { api } from "../../../services/api"; // axios instance
 
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slice/authSlice"; // pastikan path sesuai

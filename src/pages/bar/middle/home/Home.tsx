@@ -12,7 +12,7 @@ import {
 } from "../../../../redux/slice/likeSliceThread";
 import { useNavigate } from "react-router-dom";
 import type { AppDispatch, RootState } from "../../../../redux/GlobalStore";
-import socket from "../../../services/socket";
+import socket from "../../../../services/socket";
 import toast from "react-hot-toast";
 
 export default function Home() {
@@ -118,7 +118,11 @@ export default function Home() {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}
-                avatar={thread.user.photo_profile}
+                avatar={
+                  thread.user.photo_profile?.startsWith("http")
+                    ? thread.user.photo_profile // Sudah berupa URL dicebear
+                    : `http://localhost:2002/uploadUser/${thread.user.photo_profile}` // Gambar hasil upload
+                }
                 content={thread.content}
                 likes={likeCounts[thread.id] ?? thread.like_count ?? 0}
                 liked={likedThreadIds.includes(thread.id)}

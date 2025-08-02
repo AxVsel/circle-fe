@@ -1,6 +1,7 @@
 // src/redux/slices/authSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { updateUserProfile } from "./userSlice";
 
 interface User {
   id: number;
@@ -9,7 +10,7 @@ interface User {
   email: string;
   photo_profile?: string;
   background?: string;
-  // tambahkan field lain sesuai model
+  bio?: string;
 }
 
 interface AuthState {
@@ -36,6 +37,17 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(updateUserProfile.fulfilled, (state, action) => {
+      if (state.user) {
+        state.user = {
+          ...state.user,
+          ...action.payload,
+        };
+        localStorage.setItem("user", JSON.stringify(state.user)); // simpan perubahan
+      }
+    });
   },
 });
 

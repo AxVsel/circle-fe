@@ -76,7 +76,7 @@ export default function ThreadInput() {
               src={
                 user.photo_profile?.startsWith("http")
                   ? user.photo_profile
-                  : `http://localhost:2002/${user.photo_profile}`
+                  : `http://localhost:2002/uploadUser/${user.photo_profile}`
               }
               alt="avatar"
               className="w-10 h-10 rounded-full object-cover"

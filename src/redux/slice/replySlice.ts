@@ -1,7 +1,7 @@
 // src/redux/slices/replySlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import axios from "../../pages/services/axiosInstance"; // pastikan path ini sesuai dengan proyekmu
+import axios from "../../services/axiosInstance"; // pastikan path ini sesuai dengan proyekmu
 
 interface User {
   id: number;
@@ -36,7 +36,7 @@ const initialState: ReplyState = {
 export const fetchRepliesByThreadId = createAsyncThunk(
   "replies/fetchByThreadId",
   async (threadId: number) => {
-    const res = await axios.get(`/api/v1/reply/threads/${threadId}/replies`);
+    const res = await axios.get(`/reply/threads/${threadId}/replies`);
     // console.log("Response dari API:", res.data);
     return {
       threadId,

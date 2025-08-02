@@ -6,7 +6,7 @@ interface PostCardProps {
   username: string;
   handle: string;
   time: string;
-  avatar: string;
+  avatar?: string;
   content: string;
   likes: number;
   comments: number;

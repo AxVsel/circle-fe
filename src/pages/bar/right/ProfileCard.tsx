@@ -1,12 +1,26 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
-import type { RootState } from "@/redux/GlobalStore";
-
-import { useSelector } from "react-redux";
+import type { RootState, AppDispatch } from "@/redux/GlobalStore";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchFollowCounts } from "../../../redux/slice/followSlice";
+import EditProfileDialog from "./EditButtonProfile";
+import { useEffect } from "react";
 
 export default function ProfileCard() {
+  const dispatch = useDispatch<AppDispatch>();
+
   const user = useSelector((state: RootState) => state.auth.user);
+  const followersCount = useSelector(
+    (state: RootState) => state.follow.followersCount
+  );
+  const followingsCount = useSelector(
+    (state: RootState) => state.follow.followingsCount
+  );
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchFollowCounts(user.id));
+    }
+  }, [dispatch, user]);
 
   return (
     <Card className="bg-zinc-800 text-white shadow p-4 overflow-hidden w-5/6 mt-8">
@@ -18,7 +32,7 @@ export default function ProfileCard() {
             src={
               user.background.startsWith("http")
                 ? user.background
-                : `http://localhost:2002/${user.background}`
+                : `http://localhost:2002/uploadBackground/${user.background}`
             }
             alt="Avatar"
             className="object-cover w-full h-full"
@@ -34,7 +48,7 @@ export default function ProfileCard() {
               src={
                 user.photo_profile.startsWith("http")
                   ? user.photo_profile
-                  : `http://localhost:2002/${user.photo_profile}`
+                  : `http://localhost:2002/uploadUser/${user.photo_profile}`
               }
               alt="Avatar"
               className="object-cover w-full h-full"
@@ -44,12 +58,7 @@ export default function ProfileCard() {
 
         {/* Tombol Edit */}
         <div className="flex justify-end pt-2">
-          <Button
-            variant="outline"
-            className="text-white bg-zinc-900 border-white hover:bg-white/10 text-sm h-8"
-          >
-            Edit Profile
-          </Button>
+          {user && <EditProfileDialog user={user} />}
         </div>
       </div>
 
@@ -58,16 +67,18 @@ export default function ProfileCard() {
         <div className="text-lg font-semibold">{user?.full_name}</div>
         <div className="text-sm text-zinc-400">@{user?.username}</div>
         <p className="text-sm mt-2 text-zinc-300">
-          picked over by the worms, and weird fishes
+          {user?.bio?.trim()
+            ? user.bio
+            : "picked over by the worms, and weird fishes"}
         </p>
 
         {/* Followers */}
         <div className="flex gap-4 mt-3 text-sm text-zinc-400">
           <span>
-            <strong className="text-white">291</strong> Following
+            <strong className="text-white">{followingsCount}</strong> Following
           </span>
           <span>
-            <strong className="text-white">23</strong> Followers
+            <strong className="text-white">{followersCount}</strong> Followers
           </span>
         </div>
       </CardContent>

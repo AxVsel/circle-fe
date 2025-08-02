@@ -1,7 +1,7 @@
 // src/redux/slices/threadSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosMod from "../../pages/services/axiosInstance"; // pastikan path ini sesuai dengan proyekmu
-import axios from "axios";
+import axiosMod from "../../services/axiosInstance"; // pastikan path ini sesuai dengan proyekmu
+import axios from "../../services/axiosInstance";
 
 // Tipe untuk user di dalam thread
 interface User {
@@ -54,24 +54,23 @@ const initialState: ThreadState = {
 export const fetchThreads = createAsyncThunk<Thread[], FetchThreadsArgs>(
   "thread/fetchThreads",
   async ({ offset, limit }) => {
-    const res = await axios.get("http://localhost:2002/api/v1/thread/threads", {
-      withCredentials: true,
+    const res = await axios.get("/thread/threads", {
       params: { offset, limit },
     });
     return res.data.data.tweet;
   }
 );
 
-// Tambahkan ini di bawah fetchThreads
-export const fetchThreadById = createAsyncThunk<Thread, number>(
-  "thread/fetchThreadById",
-  async (threadId) => {
-    const res = await axiosMod.get(
-      `http://localhost:2002/api/v1/reply/threads/${threadId}/replies`
-    );
-    return res.data.data.thread; // pastikan sesuai dengan struktur respons backend-mu
-  }
-);
+// // Tambahkan ini di bawah fetchThreads
+// export const fetchThreadById = createAsyncThunk<Thread, number>(
+//   "thread/fetchThreadById",
+//   async (threadId) => {
+//     const res = await axiosMod.get(
+//       `http://localhost:2002/api/v1/reply/threads/${threadId}/replies`
+//     );
+//     return res.data.data.thread; // pastikan sesuai dengan struktur respons backend-mu
+//   }
+// );
 
 // Slice Redux
 const threadSlice = createSlice({
@@ -84,14 +83,14 @@ const threadSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchThreadById.fulfilled, (state, action) => {
-        console.log("Thread fetched successfully:", action.payload); // debug
-        state.loading = false;
-        const exists = state.threads.find((t) => t.id === action.payload.id);
-        if (!exists) {
-          state.threads.push(action.payload);
-        }
-      })
+      // .addCase(fetchThreadById.fulfilled, (state, action) => {
+      //   console.log("Thread fetched successfully:", action.payload); // debug
+      //   state.loading = false;
+      //   const exists = state.threads.find((t) => t.id === action.payload.id);
+      //   if (!exists) {
+      //     state.threads.push(action.payload);
+      //   }
+      // })
 
       .addCase(fetchThreads.pending, (state) => {
         state.loading = true;
