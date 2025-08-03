@@ -14,6 +14,7 @@ import profileImage from "@/assets/profile.png";
 
 import StatusInput from "./StatusInput";
 import StatusCard from "./StatusCard";
+import defaultAvatar from "@/assets/user.png";
 
 export default function Status() {
   const navigate = useNavigate();
@@ -64,7 +65,13 @@ export default function Status() {
         <div className="p-4 text-white w-full ml-5">
           <div className="flex items-start gap-3">
             <img
-              src={thread.user.photo_profile || profileImage}
+              src={
+                thread.user?.photo_profile?.startsWith("http")
+                  ? thread.user.photo_profile
+                  : thread.user?.photo_profile
+                  ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${thread.user.photo_profile}`
+                  : defaultAvatar
+              }
               alt="User Avatar"
               className="w-10 h-10 rounded-full"
             />
@@ -79,7 +86,7 @@ export default function Status() {
 
               {thread.image_url && (
                 <img
-                  src={`http://localhost:2002/uploadThreads/${thread.image_url}`}
+                  src={`https://circle-be-production-6eed.up.railway.app/uploadThreads/${thread.image_url}`}
                   alt="Thread Image"
                   className="mt-3 rounded-xl w-full max-w-md object-cover"
                 />
@@ -146,13 +153,19 @@ export default function Status() {
                 hour: "2-digit",
                 minute: "2-digit",
               })}
-              avatar={reply.user.photo_profile || profileImage}
+              avatar={
+                reply.user?.photo_profile?.startsWith("http")
+                  ? reply.user.photo_profile
+                  : reply.user?.photo_profile
+                  ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${reply.user.photo_profile}`
+                  : profileImage
+              }
               content={reply.content}
               likes={0}
               comments={0}
               image={
                 reply.image
-                  ? `http://localhost:2002/uploadReplys/${reply.image}`
+                  ? `https://circle-be-production-6eed.up.railway.app/uploadReplys/${reply.image}`
                   : undefined
               }
               liked={false}

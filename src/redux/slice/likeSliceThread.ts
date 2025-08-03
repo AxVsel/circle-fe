@@ -1,7 +1,7 @@
 // src/redux/slice/likeSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import axios from "../../services/axiosInstance";
+import axiosInstance from "../../services/axiosInstance";
 
 interface LikeState {
   likedThreadIds: number[];
@@ -23,7 +23,7 @@ export const toggleLikeThread = createAsyncThunk<
   { rejectValue: string }
 >("like/toggle", async (threadId, { rejectWithValue }) => {
   try {
-    await axios.post(`/likes/threads/${threadId}`);
+    await axiosInstance.post(`/likes/threads/${threadId}`);
     return threadId;
   } catch (err: any) {
     return rejectWithValue("Gagal melakukan like");

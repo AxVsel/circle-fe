@@ -32,7 +32,7 @@ export default function ProfileCard() {
             src={
               user.background.startsWith("http")
                 ? user.background
-                : `http://localhost:2002/uploadBackground/${user.background}`
+                : `https://circle-be-production-6eed.up.railway.app/uploadBackground/${user.background}`
             }
             alt="Avatar"
             className="object-cover w-full h-full"
@@ -48,7 +48,7 @@ export default function ProfileCard() {
               src={
                 user.photo_profile.startsWith("http")
                   ? user.photo_profile
-                  : `http://localhost:2002/uploadUser/${user.photo_profile}`
+                  : `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
               }
               alt="Avatar"
               className="object-cover w-full h-full"

@@ -23,7 +23,7 @@ export const fetchUserById = createAsyncThunk(
   "user/fetchUserById",
   async (userId: number, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/api/v1/users/user/${userId}`);
+      const response = await axios.get(`/users/user/${userId}`);
       return response.data.data;
     } catch (error: any) {
       return rejectWithValue(error.response.data.message);
@@ -38,13 +38,9 @@ export const updateUserProfile = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.put(
-        `/api/v1/users/user/${userId}`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      const response = await axios.put(`/users/user/${userId}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       return response.data.data;
     } catch (error: any) {
       return rejectWithValue(error.response.data.message);

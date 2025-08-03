@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import LeftBarButton from "./LeftBarButton";
 import PostDialog from "./DialogPost";
 import { Button } from "@/components/ui/button";
-import { api } from "../../../services/api"; // axios instance
+import axios from "../../../services/axiosInstance"; // axios instance
 
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slice/authSlice"; // pastikan path sesuai
@@ -33,7 +33,7 @@ export default function LeftBarMenu() {
 
   const handleLogout = async () => {
     try {
-      await api.post("/api/v1/auth/logout"); // panggil backend
+      await axios.post("/auth/logout"); // panggil backend
       localStorage.removeItem("token"); // hapus token jika masih pakai localStorage
       localStorage.removeItem("user"); // hapus token jika masih pakai localStorage
       dispatch(logout()); // clear redux

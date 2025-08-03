@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import galleryIcon from "@/assets/gallery-add.png";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axios from "../../../../services/axiosInstance";
 import { useSelector, useDispatch } from "react-redux";
 import type { AppDispatch, RootState } from "@/redux/GlobalStore";
 import { fetchRepliesByThreadId } from "../../../../redux/slice/replySlice";
+import defaultAvatar from "@/assets/user.png";
 
 interface Props {
   threadId: number;
@@ -46,11 +47,9 @@ export default function StatusInput({ threadId }: Props) {
 
     try {
       setLoading(true);
-      await axios.post(
-        `http://localhost:2002/api/v1/reply/threads/${threadId}/replies`,
-        formData,
-        { withCredentials: true }
-      );
+      await axios.post(`/reply/threads/${threadId}/replies`, formData, {
+        withCredentials: true,
+      });
 
       dispatch(fetchRepliesByThreadId(threadId));
       toast.success("Balasan berhasil ditambahkan!");
@@ -75,9 +74,11 @@ export default function StatusInput({ threadId }: Props) {
           {user && (
             <img
               src={
-                user.photo_profile?.startsWith("http")
+                user?.photo_profile?.startsWith("http")
                   ? user.photo_profile
-                  : `http://localhost:2002/${user.photo_profile}`
+                  : user?.photo_profile
+                  ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
+                  : defaultAvatar
               }
               alt="avatar"
               className="w-10 h-10 rounded-full object-cover"

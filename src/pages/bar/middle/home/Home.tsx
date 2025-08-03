@@ -121,7 +121,7 @@ export default function Home() {
                 avatar={
                   thread.user.photo_profile?.startsWith("http")
                     ? thread.user.photo_profile // Sudah berupa URL dicebear
-                    : `http://localhost:2002/uploadUser/${thread.user.photo_profile}` // Gambar hasil upload
+                    : `https://circle-be-production-6eed.up.railway.app/uploadUser/${thread.user.photo_profile}` // Gambar hasil upload
                 }
                 content={thread.content}
                 likes={likeCounts[thread.id] ?? thread.like_count ?? 0}
@@ -129,7 +129,7 @@ export default function Home() {
                 comments={thread.number_of_replies || 0}
                 image={
                   thread.image_url
-                    ? `http://localhost:2002/uploadThreads/${thread.image_url}`
+                    ? `https://circle-be-production-6eed.up.railway.app/uploadThreads/${thread.image_url}`
                     : undefined
                 }
                 onClickReply={() => navigate(`/threads/${thread.id}/replies`)}

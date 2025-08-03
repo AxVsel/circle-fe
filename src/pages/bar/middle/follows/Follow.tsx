@@ -10,6 +10,7 @@ import {
 import type { RootState, AppDispatch } from "../../../../redux/GlobalStore";
 import Followers from "./Followers";
 import Followings from "./Followings";
+import defaultAvatar from "@/assets/user.png";
 
 export default function Follow() {
   const dispatch = useDispatch<AppDispatch>();
@@ -108,9 +109,11 @@ export default function Follow() {
                 username={user.username}
                 bio={user.bio ?? ""}
                 image={
-                  user.photo_profile
-                    ? `http://localhost:2002/uploadUser/${user.photo_profile}`
-                    : undefined
+                  user?.photo_profile?.startsWith("http")
+                    ? user.photo_profile
+                    : user?.photo_profile
+                    ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
+                    : defaultAvatar
                 }
                 isFollowing={isUserFollowing(user.id)}
                 onFollowToggle={() => handleFollowToggle(user.id)}
@@ -127,9 +130,11 @@ export default function Follow() {
                 username={user.username}
                 bio={user.bio ?? ""}
                 image={
-                  user.photo_profile
-                    ? `http://localhost:2002/uploadUser/${user.photo_profile}`
-                    : undefined
+                  user?.photo_profile?.startsWith("http")
+                    ? user.photo_profile
+                    : user?.photo_profile
+                    ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
+                    : defaultAvatar
                 }
                 isFollowing={true}
                 onFollowToggle={() => handleFollowToggle(user.id)}

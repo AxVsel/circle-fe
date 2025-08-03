@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import galleryIcon from "@/assets/gallery-add.png";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axios from "../../../../services/axiosInstance";
 
 import { useSelector, useDispatch } from "react-redux";
 import { fetchThreads } from "../../../../redux/slice/threadSlice";
@@ -42,13 +42,9 @@ export default function ThreadInput() {
     }
     try {
       setLoading(true);
-      await axios.post(
-        "http://localhost:2002/api/v1/thread/threads",
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.post("/thread/threads", formData, {
+        withCredentials: true,
+      });
 
       dispatch(fetchThreads({ offset: 0, limit: 10 }));
 
@@ -76,7 +72,7 @@ export default function ThreadInput() {
               src={
                 user.photo_profile?.startsWith("http")
                   ? user.photo_profile
-                  : `http://localhost:2002/uploadUser/${user.photo_profile}`
+                  : `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
               }
               alt="avatar"
               className="w-10 h-10 rounded-full object-cover"

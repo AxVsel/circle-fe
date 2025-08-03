@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
-import { api } from "../../services/api";
+import axios from "../../services/axiosInstance";
 import { login } from "../../redux/slice/authSlice";
 import circleIcon from "../../assets/logo.png";
 
@@ -20,7 +20,7 @@ export default function AuthRegister() {
     e.preventDefault();
 
     try {
-      const res = await api.post("/api/v1/auth/register", {
+      const res = await axios.post("/auth/register", {
         username,
         full_name,
         email,
@@ -36,6 +36,7 @@ export default function AuthRegister() {
           email: userData.email,
           photo_profile: userData.photo_profile,
           background: userData.background,
+          bio: userData.bio,
         };
 
         localStorage.setItem("token", userData.token);
@@ -48,7 +49,8 @@ export default function AuthRegister() {
         );
 
         toast.success("Registrasi berhasil!");
-        navigate("/");
+        // Force full refresh to reinitialize state
+        window.location.href = "/";
       }
     } catch (error: any) {
       const msg =

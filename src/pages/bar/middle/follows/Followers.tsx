@@ -24,7 +24,7 @@ export default function Followers({
     <div className="flex items-center justify-between p-4 hover:bg-zinc-800 transition">
       <div className="flex items-center gap-3">
         <img
-          src={image || defaultAvatar}
+          src={image}
           alt={full_name}
           className="w-12 h-12 rounded-full object-cover"
         />

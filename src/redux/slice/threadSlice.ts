@@ -1,6 +1,5 @@
 // src/redux/slices/threadSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axiosMod from "../../services/axiosInstance"; // pastikan path ini sesuai dengan proyekmu
 import axios from "../../services/axiosInstance";
 
 // Tipe untuk user di dalam thread

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/slice/authSlice"; // pastikan login action tersedia
-import { api } from "../../services/api"; // axios instance
+import axios from "../../services/axiosInstance"; // axios instance
 import circleIcon from "../../assets/logo.png";
 import { toast } from "react-hot-toast";
 
@@ -16,7 +16,7 @@ export default function AuthLogin() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await api.post("/api/v1/auth/login", {
+      const res = await axios.post("/auth/login", {
         identifier,
         password,
       });

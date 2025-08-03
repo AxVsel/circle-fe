@@ -109,7 +109,7 @@ export const fetchFollowersList = createAsyncThunk(
       username: item.follower.username,
       full_name: item.follower.full_name,
       bio: item.follower.bio,
-      image: item.follower.image,
+      photo_profile: item.follower.photo_profile,
     }));
   }
 );
@@ -127,7 +127,7 @@ export const fetchFollowingsList = createAsyncThunk(
       username: item.following.username,
       full_name: item.following.full_name,
       bio: item.following.bio,
-      image: item.following.image,
+      photo_profile: item.following.photo_profile,
     }));
   }
 );
@@ -152,7 +152,7 @@ const followSlice = createSlice({
 
       .addCase(followUser.fulfilled, (state) => {
         state.isFollowing = true;
-        state.followersCount += 1;
+        state.followingsCount += 1;
       })
       .addCase(followUser.rejected, (state, action) => {
         state.error = action.error.message || "Failed to follow user.";
@@ -160,7 +160,7 @@ const followSlice = createSlice({
 
       .addCase(unfollowUser.fulfilled, (state) => {
         state.isFollowing = false;
-        state.followersCount -= 1;
+        state.followingsCount -= 1;
       })
       .addCase(unfollowUser.rejected, (state, action) => {
         state.error = action.error.message || "Failed to unfollow user.";
