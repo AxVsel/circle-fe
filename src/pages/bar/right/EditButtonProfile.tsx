@@ -133,7 +133,7 @@ export default function EditProfileDialog({ user }: EditProfileDialogProps) {
               onChange={handleBackgroundChange}
             />
             <div
-              className="absolute bottom left-5 -bottom-10 w-20 h-20 rounded-full bg-zinc-800 border-4 border-zinc-950 overflow-hidden z-10 cursor-pointer"
+              className="absolute  left-5 bottom-2 w-20 h-20 rounded-full bg-zinc-800 border-4 border-zinc-950 overflow-hidden z-10 cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
                 pfInputRef.current?.click();
