@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLikeThread } from "../../../../redux/slice/likeSliceThread";
 import { fetchRepliesByThreadId } from "../../../../redux/slice/replySlice";
-import { fetchThreads } from "../../../../redux/slice/threadSlice";
+
 import type { AppDispatch, RootState } from "../../../../redux/GlobalStore";
 
 import arrowLeft from "@/assets/arrow-left.png";

@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import defaultAvatar from "@/assets/user.png";
 
 interface FollowCardProps {
   id: number;

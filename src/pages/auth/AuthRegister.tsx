@@ -1,6 +1,6 @@
 // pages/auth/AuthRegister.tsx
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import axios from "../../services/axiosInstance";
@@ -13,7 +13,6 @@ export default function AuthRegister() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
