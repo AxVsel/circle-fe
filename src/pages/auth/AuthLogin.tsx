@@ -23,7 +23,6 @@ export default function AuthLogin() {
 
       if (res.data && res.data.data) {
         const userData = res.data.data;
-
         const user = {
           id: userData.user_id,
           username: userData.username,
