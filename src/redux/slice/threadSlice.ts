@@ -60,17 +60,6 @@ export const fetchThreads = createAsyncThunk<Thread[], FetchThreadsArgs>(
   }
 );
 
-// // Tambahkan ini di bawah fetchThreads
-// export const fetchThreadById = createAsyncThunk<Thread, number>(
-//   "thread/fetchThreadById",
-//   async (threadId) => {
-//     const res = await axiosMod.get(
-//       `http://localhost:2002/api/v1/reply/threads/${threadId}/replies`
-//     );
-//     return res.data.data.thread; // pastikan sesuai dengan struktur respons backend-mu
-//   }
-// );
-
 // Slice Redux
 const threadSlice = createSlice({
   name: "thread",
@@ -82,14 +71,6 @@ const threadSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // .addCase(fetchThreadById.fulfilled, (state, action) => {
-      //   console.log("Thread fetched successfully:", action.payload); // debug
-      //   state.loading = false;
-      //   const exists = state.threads.find((t) => t.id === action.payload.id);
-      //   if (!exists) {
-      //     state.threads.push(action.payload);
-      //   }
-      // })
 
       .addCase(fetchThreads.pending, (state) => {
         state.loading = true;

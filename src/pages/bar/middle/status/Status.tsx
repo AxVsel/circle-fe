@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleLikeThread } from "../../../../redux/slice/likeSliceThread";
-import { fetchRepliesByThreadId } from "../../../../redux/slice/replySlice";
+import { toggleLikeThread } from "@/redux/slice/likeSliceThread";
+import { fetchRepliesByThreadId } from "@/redux/slice/replySlice";
 
-import type { AppDispatch, RootState } from "../../../../redux/GlobalStore";
+import type { AppDispatch, RootState } from "@/redux/GlobalStore";
 
 import arrowLeft from "@/assets/arrow-left.png";
 import heart from "@/assets/heart.png";
@@ -69,7 +69,7 @@ export default function Status() {
                 thread.user?.photo_profile?.startsWith("http")
                   ? thread.user.photo_profile
                   : thread.user?.photo_profile
-                  ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${thread.user.photo_profile}`
+                  ? `http://localhost:2002/uploadUser/${thread.user.photo_profile}`
                   : defaultAvatar
               }
               alt="User Avatar"
@@ -86,7 +86,7 @@ export default function Status() {
 
               {thread.image_url && (
                 <img
-                  src={`https://circle-be-production-6eed.up.railway.app/uploadThreads/${thread.image_url}`}
+                  src={`http://localhost:2002/uploadThreads/${thread.image_url}`}
                   alt="Thread Image"
                   className="mt-3 rounded-xl w-full max-w-md object-cover"
                 />
@@ -157,7 +157,7 @@ export default function Status() {
                 reply.user?.photo_profile?.startsWith("http")
                   ? reply.user.photo_profile
                   : reply.user?.photo_profile
-                  ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${reply.user.photo_profile}`
+                  ? `http://localhost:2002/uploadUser/${reply.user.photo_profile}`
                   : profileImage
               }
               content={reply.content}
@@ -165,7 +165,7 @@ export default function Status() {
               comments={0}
               image={
                 reply.image
-                  ? `https://circle-be-production-6eed.up.railway.app/uploadReplys/${reply.image}`
+                  ? `http://localhost:2002/uploadReplys/${reply.image}`
                   : undefined
               }
               liked={false}

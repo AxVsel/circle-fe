@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./bar/middle/home/Home";
 import Search from "./bar/middle/search/Search";
 import Follows from "./bar/middle/follows/Follow";
-import Profile from "./bar/middle/profile/Profile";
+import MyProfile from "./bar/middle/profile/MyProfile";
 import Status from "./bar/middle/status/Status";
 import NotFound from "./not/NotFound";
 import LeftBarMenu from "./bar/left/LeftBarMenu";
@@ -20,7 +20,7 @@ export default function GlobalBar() {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/follows" element={<Follows />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<MyProfile />} />
           <Route path="/threads/:threadId/replies" element={<Status />} />
 
           <Route

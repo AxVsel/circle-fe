@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../services/axiosInstance";
+import axios from "@/services/axiosInstance";
 
 export interface UserState {
   photo_profile: string;

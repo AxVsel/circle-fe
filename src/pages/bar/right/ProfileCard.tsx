@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import type { RootState, AppDispatch } from "@/redux/GlobalStore";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchFollowCounts } from "../../../redux/slice/followSlice";
-import EditProfileDialog from "./EditButtonProfile";
+import { fetchFollowCounts } from "@/redux/slice/followSlice";
+import EditProfileDialog from "@/pages/bar/right/EditButtonProfile";
 import { useEffect } from "react";
 
 export default function ProfileCard() {
@@ -32,7 +32,7 @@ export default function ProfileCard() {
             src={
               user.background.startsWith("http")
                 ? user.background
-                : `https://circle-be-production-6eed.up.railway.app/uploadBackground/${user.background}`
+                : `http://localhost:2002/uploadBackground/${user.background}`
             }
             alt="Avatar"
             className="object-cover w-full h-full"
@@ -48,7 +48,7 @@ export default function ProfileCard() {
               src={
                 user.photo_profile.startsWith("http")
                   ? user.photo_profile
-                  : `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
+                  : `http://localhost:2002/uploadUser/${user.photo_profile}`
               }
               alt="Avatar"
               className="object-cover w-full h-full"

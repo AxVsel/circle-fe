@@ -112,7 +112,7 @@ export default function Follow() {
                   user?.photo_profile?.startsWith("http")
                     ? user.photo_profile
                     : user?.photo_profile
-                    ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
+                    ? `http://localhost:2002/uploadUser/${user.photo_profile}`
                     : defaultAvatar
                 }
                 isFollowing={isUserFollowing(user.id)}
@@ -133,7 +133,7 @@ export default function Follow() {
                   user?.photo_profile?.startsWith("http")
                     ? user.photo_profile
                     : user?.photo_profile
-                    ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
+                    ? `http://localhost:2002/uploadUser/${user.photo_profile}`
                     : defaultAvatar
                 }
                 isFollowing={true}

@@ -6,6 +6,7 @@ import likeReducer from "./slice/likeSliceThread";
 import replyReducer from "./slice/replySlice";
 import followReducer from "./slice/followSlice";
 import userReducer from "./slice/userSlice";
+import userThreadsReducer from "./slice/userThreadSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     replies: replyReducer,
     follow: followReducer,
     user: userReducer,
+    userThreads: userThreadsReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;
