@@ -8,7 +8,7 @@ import {
   fetchFollowingsList,
 } from "@/redux/slice/followSlice";
 import useDebounce from "@/hooks/useDebounce";
-import FollowAll from "../follows/FollowAll";
+import FollowAll from "./FollowAll";
 import userIcon from "@/assets/user.png";
 import defaultAvatar from "@/assets/user.png";
 
@@ -91,7 +91,7 @@ export default function Search() {
               user?.photo_profile?.startsWith("http")
                 ? user.photo_profile
                 : user?.photo_profile
-                ? `https://circle-be-production-6eed.up.railway.app/uploadUser/${user.photo_profile}`
+                ? `http://localhost:2002/uploadUser/${user.photo_profile}`
                 : defaultAvatar
             }
             isFollowing={isUserFollowing(user.id)}

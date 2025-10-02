@@ -1,18 +1,15 @@
-import InputPost from "./ThreadInput";
-import ThreadCard from "./ThreadCard";
+import InputPost from "@/pages/bar/middle/home/ThreadInput";
+import ThreadCard from "@/pages/bar/middle/home/ThreadCard";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchThreads,
-  prependThread,
-} from "../../../../redux/slice/threadSlice";
+import { fetchThreads, prependThread } from "@/redux/slice/threadSlice";
 import {
   setLikeDataFromThreads,
   toggleLikeThread,
-} from "../../../../redux/slice/likeSliceThread";
+} from "@/redux/slice/likeSliceThread";
 import { useNavigate } from "react-router-dom";
-import type { AppDispatch, RootState } from "../../../../redux/GlobalStore";
-import socket from "../../../../services/socket";
+import type { AppDispatch, RootState } from "@/redux/GlobalStore";
+import socket from "@/services/socket";
 import toast from "react-hot-toast";
 
 export default function Home() {
@@ -120,8 +117,8 @@ export default function Home() {
                 })}
                 avatar={
                   thread.user.photo_profile?.startsWith("http")
-                    ? thread.user.photo_profile // Sudah berupa URL dicebear
-                    : `https://circle-be-production-6eed.up.railway.app/uploadUser/${thread.user.photo_profile}` // Gambar hasil upload
+                    ? thread.user.photo_profile
+                    : `http://localhost:2002/uploadUser/${thread.user.photo_profile}` // Gambar hasil upload
                 }
                 content={thread.content}
                 likes={likeCounts[thread.id] ?? thread.like_count ?? 0}
@@ -129,7 +126,7 @@ export default function Home() {
                 comments={thread.number_of_replies || 0}
                 image={
                   thread.image_url
-                    ? `https://circle-be-production-6eed.up.railway.app/uploadThreads/${thread.image_url}`
+                    ? `http://localhost:2002/uploadThreads/${thread.image_url}`
                     : undefined
                 }
                 onClickReply={() => navigate(`/threads/${thread.id}/replies`)}
